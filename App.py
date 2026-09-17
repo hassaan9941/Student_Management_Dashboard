@@ -1,7 +1,25 @@
 import streamlit as st
 import pandas as pd
+import os
+import mysql.connector
 
-students = pd.read_csv('students.csv')
+def get_students():
+
+    connection = mysql.connector.connect(
+        host=os.environ["DB_HOST"],
+        user=os.environ["DB_USER"],
+        password=os.environ["DB_PASSWORD"],
+        database=os.environ["DB_NAME"]
+    )
+
+    query = "SELECT * FROM students"
+
+    students = pd.read_sql(query, connection)
+
+    connection.close()
+
+    return students
+students = get_students()
 st.title("Student Managment System")
 st.write("Welcome to student managment system")
 # dashboard metrices
