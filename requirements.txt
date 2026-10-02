@@ -1,4 +1,6 @@
 streamlit
 pandas
 matplotlib
-mysql.connector
+mysql-connector-python
+boto3
+python-dotenv
